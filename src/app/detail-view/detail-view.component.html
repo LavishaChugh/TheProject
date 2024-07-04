@@ -1,0 +1,89 @@
+<section style="background-color: #eee; padding: 100px;">
+  <div class="head">
+    <h3 class="text-center">User-Details</h3>
+  </div>
+  <div class="container py-5" *ngIf="selectedUser">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Type</label>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ selectedUser.type }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Full Name</label>
+              <div class="col-sm-9">
+                <ng-container *ngIf="!editMode; else editName">
+                  <p class="text-muted mb-0">{{ selectedUser.name }}</p>
+                </ng-container>
+                <ng-template #editName>
+                  <input type="text" class="form-control" [(ngModel)]="selectedUser.name">
+                </ng-template>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Email</label>
+              <div class="col-sm-9">
+                <ng-container *ngIf="!editMode; else editEmail">
+                  <p class="text-muted mb-0">{{ selectedUser.email }}</p>
+                </ng-container>
+                <ng-template #editEmail>
+                  <input type="email" class="form-control" [(ngModel)]="selectedUser.email">
+                </ng-template>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Phone</label>
+              <div class="col-sm-9">
+                <ng-container *ngIf="!editMode; else editPhone">
+                  <p class="text-muted mb-0">{{ selectedUser.phone }}</p>
+                </ng-container>
+                <ng-template #editPhone>
+                  <input type="text" class="form-control" [(ngModel)]="selectedUser.phone">
+                </ng-template>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Address</label>
+              <div class="col-sm-9">
+                <ng-container *ngIf="!editMode; else editAddress">
+                  <p class="text-muted mb-0">{{ selectedUser.address }}</p>
+                </ng-container>
+                <ng-template #editAddress>
+                  <input type="text" class="form-control" [(ngModel)]="selectedUser.address">
+                </ng-template>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">DOB</label>
+              <div class="col-sm-9">
+                <ng-container *ngIf="!editMode; else editDob">
+                  <p class="text-muted mb-0">{{ selectedUser.dob }}</p>
+                </ng-container>
+                <ng-template #editDob>
+                  <input type="date" class="form-control" [(ngModel)]="selectedUser.dob">
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!editMode">
+      <button class="edit-btn" (click)="editMode = true">Edit</button>
+      <button class="delete-btn" (click)="delete(selectedUser.email)">Delete</button>
+    </div>
+    <div *ngIf="editMode">
+      <button class="ok-btn" (click)="onSave()">OK</button>
+      <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+</section>
